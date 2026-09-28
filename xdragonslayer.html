@@ -730,7 +730,7 @@ function weaponGlow(){let best=null,bl=0;for(const k in hero.wpn.aff)if(hero.wpn
 /* ================= hero: damage, healing, perfect dodge, levels ================= */
 function hurtHero(dmg,src,o={}){const S=hero.S;if(Math.random()<S.block){pop(hero.x,hero.y-26,'BLOCKED',P.ice);SFX.block();hero.inv=.3;return}
  const d=Math.max(1,Math.round(dmg*60/(60+S.def)*rnd(.9,1.1)));hero.hp-=d;hero.inv=.55;hero.flash=.18;hero.portalT=0;pop(hero.x,hero.y-26,'-'+d,'#ff5a5a');SFX.hurt();G.shake=Math.max(G.shake,3);
- if(src&&S.thorns>0&&src.kind==='mon'&&!src.dead)damageMon(src,d*S.thorns*2,{dot:1,noCrit:1});
+ if(src&&S.thorns>0&&src.kind==='mon'&&!src.dead)damageMon(src,d*S.thorns,{dot:1,noCrit:1});
  if(o.poison)hero.poison=Math.max(hero.poison,o.poison);if(o.slow)hero.slowT=Math.max(hero.slowT,o.slow);if(o.burn)hero.burnT=1.4;
  if(o.kb!==undefined){hero.kbx=Math.cos(o.kb)*150;hero.kby=Math.sin(o.kb)*150;hero.kbT=.12}if(hero.hp<=0)heroDie()}
 function healHero(n,silent){const b=hero.hp;hero.hp=Math.min(hero.S.maxhp,hero.hp+n);if(!silent&&hero.hp-b>=1)pop(hero.x,hero.y-26,'+'+Math.round(hero.hp-b),P.green)}
